@@ -7,7 +7,7 @@ import Swal from 'sweetalert2'
 const URL = process.env.REACT_APP_BASE_URL
 
 function FormularioB ({data, tiene, setModalVer, actualizar}) {
-
+    const [guardar, setGuardar] = useState(false)
     const [form, setForm] = useState({
         MODELO: '',
         COLOR: '',
@@ -94,6 +94,7 @@ function FormularioB ({data, tiene, setModalVer, actualizar}) {
     }
 
     const handleSubmit = (e) => {
+        setGuardar(true)
         e.preventDefault()
         if (!tiene) {
 
@@ -264,42 +265,6 @@ function FormularioB ({data, tiene, setModalVer, actualizar}) {
                 </div>
 
                 <div className='row mb-3'>
-
-                        <Form.Group as={Col}>
-                            <Form.Label>VALOR</Form.Label>
-                            <Form.Control
-                                type="number"
-                                name="VALOR"
-                                value={form.VALOR}
-                                onChange={handleChangeValor}
-                                required>
-                            </Form.Control>
-                        </Form.Group>
-
-                    { tiene ?
-                        <Form.Group as={Col}>
-                            <Form.Label>FECHA DE REGISTRO</Form.Label>
-                            <Form.Control
-                                type="date"
-                                name="FECHA_REGISTRO"
-                                value={form.FECHA_REGISTRO}
-                                disabled>
-                            </Form.Control>
-                        </Form.Group> : 
-                        <Form.Group as={Col}>
-                            <Form.Label>FECHA DE REGISTRO</Form.Label>
-                            <Form.Control
-                                type="date"
-                                name="FECHA_REGISTRO"
-                                value={form.FECHA_REGISTRO}
-                                onChange={handleChange}
-                                required>
-                            </Form.Control>
-                        </Form.Group> }
-
-                </div>
-
-                <div className='row mb-3'>
                     <Form.Group as={Col}>
                             <Form.Label>CILINDRAJE</Form.Label>
                             <Form.Control
@@ -323,6 +288,30 @@ function FormularioB ({data, tiene, setModalVer, actualizar}) {
                         </Form.Group>
                 </div>
 
+                <div className='row mb-3'>
+
+                    <div className='col-6'>
+                        <label for="basic-url" class="form-label">VALOR</label>
+                        <div className="input-group mb-3">
+                            <span className="input-group-text">$</span>
+                            <input type="number" class="form-control" value={form.VALOR} onChange={handleChangeValor} name='VALOR' aria-label="Amount (to the nearest dollar)" placeholder='Costo en COP' />
+                        </div>
+                    </div>
+
+                    { tiene ?
+                        <Form.Group as={Col}>
+                            <Form.Label>FECHA DE REGISTRO</Form.Label>
+                            <Form.Control
+                                type="date"
+                                name="FECHA_REGISTRO"
+                                value={form.FECHA_REGISTRO}
+                                disabled>
+                            </Form.Control>
+                        </Form.Group> : 
+                        undefined}
+
+                </div>
+
                 <div className='row'>
                         <Form.Group as={Col}>
                             <Form.Label>IMAGEN</Form.Label>
@@ -334,7 +323,11 @@ function FormularioB ({data, tiene, setModalVer, actualizar}) {
             
             <Card.Footer>
                 <div className="text-right">
-                    <Button type="submit" variant="success">Guardar</Button>
+                    {
+                        guardar ?
+                        <Button type="submit" variant="success" disabled><span class="spinner-border spinner-border-sm mx-1" role="status" aria-hidden="true"></span>Guardando</Button>
+                        : <Button type="submit" variant="success">Guardar</Button>
+                    }
                 </div>
             </Card.Footer>
             </Card>

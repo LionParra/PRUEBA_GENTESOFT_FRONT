@@ -6,7 +6,7 @@ import Swal from 'sweetalert2'
 const URL = process.env.REACT_APP_BASE_URL
 
 function FormuVenta ({id, setModalVender, actualizar}) {
-
+    const [guardar, setGuardar] = useState(false)
     const [form, setForm] = useState({
             NOMBRE: '',
             DOCUMENTO: ''
@@ -17,6 +17,7 @@ function FormuVenta ({id, setModalVender, actualizar}) {
     }
 
     const handleSubmit = (e) => {
+        setGuardar(true)
         e.preventDefault()
 
         let config = {
@@ -84,7 +85,12 @@ function FormuVenta ({id, setModalVender, actualizar}) {
             
             <Card.Footer>
                 <div className="text-right">
-                    <Button type="submit" variant="secondary">Vender</Button>
+                    {
+                        guardar ?
+                        <Button type="submit" variant="secondary" disabled><span class="spinner-border spinner-border-sm mx-1" role="status" aria-hidden="true"></span>Guardando</Button>
+                        : <Button type="submit" variant="secondary">Vender</Button>
+                    }
+                    
                 </div>
             </Card.Footer>
         </Card>

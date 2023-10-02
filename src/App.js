@@ -1,8 +1,10 @@
 import { Link, BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css'
-import Home from './Components/home/home';
-import Carros from './Components/carros/carros';
-import Motos from './Components/motos/motos';
+import Home from './Components/home/home'
+import Carros from './Components/carros/carros'
+import Motos from './Components/motos/motos'
+import Precios from './Components/precios/precios'
+import Ventas from './Components/ventas/ventas'
 import {AiFillCar} from 'react-icons/ai'
 
 function App() {
@@ -22,6 +24,12 @@ function App() {
                   <li className="nav-item">
                     <Link className="nav-link active" aria-current="page" to="/motos">Ver Motos</Link>
                   </li>
+                  <li className="nav-item">
+                    <Link className="nav-link active" aria-current="page" to="/precios">Lista de Precios</Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link active" aria-current="page" to="/ventas">Log de Ventas</Link>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -31,6 +39,8 @@ function App() {
           <Route path='/motos' Component={Motos}></Route>
           <Route path='/carros' Component={Carros}></Route>
           <Route path='/' Component={Home}></Route>
+          <Route path='/precios' Component={Precios}></Route>
+          <Route path='/ventas' Component={Ventas}></Route>
         </Routes>
        
 
